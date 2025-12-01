@@ -8,7 +8,7 @@ Sistema inteligente de análise de estabelecimentos comerciais usando IA. Identi
 
 ## 🎥 Demonstração
 
-> **Nota**: Adicione aqui um GIF ou vídeo mostrando o app em funcionamento
+![Vídeo](https://github.com/user-attachments/assets/26c820fe-71d2-4fef-8cd7-8e19d5112b14)
 
 ---
 
