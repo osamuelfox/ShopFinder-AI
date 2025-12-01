@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopFinder AI - Client Side</title>
+
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+</head>
+<body>
+    
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-header">
+                <span class="material-symbols-outlined">view_in_ar</span>
+                <h3>ShopFinder AI</h3>
+            </div>
+            <nav>
+                <p>Histórico Recente</p>
+                <ul id="history-list">
+                    <li class="history-item">
+                        <div class="history-placeholder">
+                            <span class="material-symbols-outlined">image</span>
+                        </div>
+                        <div class="history-item-info">
+                            <strong>Aguardando...</strong>
+                            <span>Nenhuma análise</span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Análise de Estabelecimentos</h1>
+                <p>Identificação automática de locais e busca geográfica via IA.</p>
+            </header>
+
+            <section id="upload-section" class="upload-area">
+                <div class="upload-box" id="drop-zone">
+                    <span class="material-symbols-outlined">cloud_upload</span>
+                    <p>Clique ou arraste para fazer upload</p>
+                    <small>Suporta PNG, JPG, WEBP (Maximo 10MB)</small>
+                    
+                    <input type="file" id="file-upload" accept="image/*" style="display: none;">
+                    <button class="btn-primary" id="btn-select">Selecionar Imagem</button>
+
+                    <div id="loader" class="loader-overlay hidden">
+                        <div class="spinner"></div>
+                        <p>Analisando com Gemini...</p>
+                        <small>Identificando fachada e buscando locais...</small>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results-section" class="results-area hidden">
+                <button class="back-button" onclick="resetApp()">
+                    <span class="material-symbols-outlined">arrow_back</span> Nova Análise
+                </button>
+
+                <div class="card">
+                    <div class="analysis-layout">
+                        <div class="analysis-image-container">
+                            <img id="res-img" src="" alt="Imagem Analisada">
+                        </div>
+                        <div class="analysis-info">
+                            <h2 id="res-name">Carregando...</h2>
+                            <span class="category" id="res-category">...</span>
+                            
+                            <div class="tags-container" id="res-tags"></div>
+                            <div class="features" id="res-features"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card description-block">
+                    <h3><span class="material-symbols-outlined" style="color:var(--primary-color)">style</span> Estilo do Ambiente</h3>
+                    <p id="res-style">...</p>
+
+                    <h3><span class="material-symbols-outlined" style="color:var(--primary-color)">description</span> Análise Detalhada</h3>
+                    <p id="res-desc">...</p>
+                </div>
+
+                <div class="card" id="nearby-card">
+                    <div class="nearby-header">
+                        <span class="material-symbols-outlined" style="color:var(--primary-color); font-size:28px;">explore</span>
+                        <h2>Locais Sugeridos Próximos</h2>
+                    </div>
+                    <p style="color:#666; margin-bottom:20px;">Baseado na análise da IA e sua localização.</p>
+
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
+                    
+                    <div class="nearby-grid" id="res-nearby"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>
